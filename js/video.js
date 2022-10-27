@@ -36,30 +36,16 @@ document.querySelector('#skip').addEventListener('click', function() {
 	else video.currentTime += 10;
 });
 document.querySelector('#mute').addEventListener('click', function() {
-	console.log('e')
-	if (mute.textContent == 'Mute') {
-		mute.textContent = 'Unmute';
-		tempvolume = video.volume;
-		video.volume = 0;
-	}
-	else {
-		mute.textContent = 'Mute';
-		video.volume = tempvolume;
-	}
-		slider.value = video.volume*100;
-		volume.textContent = video.volume*100 + '%';
+	video.muted = !video.muted
+	if (mute.textContent == 'Mute') mute.textContent = 'Unmute';
+	else mute.textContent = 'Mute';
 });
 // should the video volume be altered if it is muted?
 // should the slider be set to 0 when it is muted?
 // should the slider be set back to its original position when it is unmuted?
-document.querySelector('#slider').addEventListener('input', function() {
-	if (mute.textContent == 'Mute') {
-		volume.textContent = slider.value + '%';
-		video.volume = slider.value/100;
-	}
-	else {
-		slider.value = video.volume*100;
-	}
+document.querySelector('#slider').addEventListener('change', function() {
+	volume.textContent = slider.value + '%';
+	video.volume = slider.value/100;
 });
 document.querySelector('#vintage').addEventListener('click', function() {
 	video.classList.add('oldSchool');
